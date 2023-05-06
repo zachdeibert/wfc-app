@@ -1,29 +1,31 @@
-/*
- * Copyright (C) 2017 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.github.zachdeibert.wfcapp
 
-import android.app.Activity
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
 
-/**
- * Loads [MainFragment].
- */
-class MainActivity : Activity() {
-
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun onResume() {
+        super.onResume()
+        val web = findViewById<WebView>(R.id.webView)
+        web.settings.javaScriptEnabled = true
+        web.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                resources.openRawResource(R.raw.wrapper).use {
+                    val b = ByteArray(it.available())
+                    it.read(b)
+                    web.evaluateJavascript(String(b)) {}
+                }
+            }
+        }
+        web.loadUrl("https://online.westsidefamily.church/")
     }
 }
