@@ -12,11 +12,11 @@
                 "}" +
                 "iframe {" +
                     "visibility: visible !important;" +
-                    "position: fixed;" +
-                    "top: 0;" +
-                    "left: 0;" +
-                    "bottom: 0;" +
-                    "right: 0;" +
+                    "position: fixed !important;" +
+                    "top: 0 !important;" +
+                    "left: 0 !important;" +
+                    "bottom: 0 !important;" +
+                    "right: 0 !important;" +
                 "}";
             document.body.appendChild(style);
         } else {

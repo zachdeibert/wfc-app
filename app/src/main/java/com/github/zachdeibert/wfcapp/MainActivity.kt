@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val web = findViewById<WebView>(R.id.webView)
         web.settings.javaScriptEnabled = true
+        web.settings.mediaPlaybackRequiresUserGesture = false
         web.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 resources.openRawResource(R.raw.wrapper).use {

@@ -4,8 +4,9 @@ const fs = require("fs");
 
 electron.app.whenReady().then(() => {
     const win = new electron.BrowserWindow({
-        "width": 800,
-        "height": 600
+        "width": 1920 / 2,
+        "height": 1080 / 2,
+        "frame": false
     });
     fs.readFile("../app/src/main/res/raw/wrapper.js", (err, data) => {
         if (err) {
