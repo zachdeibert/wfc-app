@@ -17,6 +17,9 @@
                     "left: 0 !important;" +
                     "bottom: 0 !important;" +
                     "right: 0 !important;" +
+                "}" +
+                "iframe#hubspot-conversations-iframe {" +
+                    "display: none !important;" +
                 "}";
             document.body.appendChild(style);
         } else {
